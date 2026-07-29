@@ -23,7 +23,7 @@ Author: magicpin AI Challenge Team
 import os
 
 # Your bot's URL (where your bot is running)
-BOT_URL = "http://localhost:8080"
+BOT_URL = os.environ.get("BOT_URL", "https://vera-bot-lo0i.onrender.com").rstrip("/")
 
 # Choose your LLM provider: "openai", "anthropic", "gemini", "deepseek", "groq", "ollama", "openrouter"
 LLM_PROVIDER = "groq"
@@ -401,7 +401,7 @@ class BotClient:
         url = f"{self.base_url}{path}"
         start = time.time()
         body = json.dumps(body_dict).encode("utf-8") if body_dict else None
-        headers = {"Content-Type": "application/json"}
+        headers = {"Content-Type": "application/json", "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
         req = urlrequest.Request(url, data=body, method=method, headers=headers)
 
         try:
