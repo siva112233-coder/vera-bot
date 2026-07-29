@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: vera-ai
+    runtime: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT --workers 1 --log-level info
+    healthCheckPath: /v1/healthz
+    envVars:
+      - key: VERA_TEAM_NAME
+        value: "Vera Engine"
+      - key: VERA_VERSION
+        value: "1.0.0"
+      - key: VERA_CONTACT_EMAIL
+        value: "team@example.com"
+      - key: PYTHON_VERSION
+        value: "3.12.0"
